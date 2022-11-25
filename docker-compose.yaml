@@ -17,4 +17,4 @@ networks:
   counter-net:
 
 volumes:
-  counter-val:
+  counter-vol:
