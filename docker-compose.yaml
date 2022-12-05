@@ -1,0 +1,20 @@
+version: "1"
+services:
+  spring-jwt:
+    build: .
+    command: java -jar antMatchers-0.0.1-SNAPSHOT.jar
+    ports:
+      - target: 8080
+        published: 8080
+    networks:
+      - counter-net
+    volumes:
+      - type: volume
+        source: counter-vol
+        target: /code
+
+networks:
+  counter-net:
+
+volumes:
+  counter-vol:

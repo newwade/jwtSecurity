@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.example.antMatchers.controller.ProductControllerTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.827 s - in com.example.antMatchers.controller.ProductControllerTest
+=======
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.079 s - in com.example.antMatchers.controller.ProductControllerTest
+>>>>>>> 613df2899b39d73a3e88407a7b17e1c8c5053958
