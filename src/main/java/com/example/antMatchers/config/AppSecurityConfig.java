@@ -22,13 +22,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.WebApplicationInitializer;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
 import static com.example.antMatchers.enums.Roles.*;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class AppSecurityConfig   extends  WebSecurityConfigurerAdapter{
+public class AppSecurityConfig   extends  WebSecurityConfigurerAdapter   implements WebApplicationInitializer {
 
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -51,6 +55,12 @@ public class AppSecurityConfig   extends  WebSecurityConfigurerAdapter{
         auth.userDetailsService(jwtUserDetailService).passwordEncoder(this.passwordEncoder);
     }
 
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        servletContext.setInitParameter(
+                "spring.profiles.active","cloud"
+        );
+    }
 //
 //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -79,11 +89,9 @@ public class AppSecurityConfig   extends  WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
     /*
     Stateless session enables authentication for every request.
     */
-
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.csrf().disable();
         http.headers().frameOptions().disable().and()

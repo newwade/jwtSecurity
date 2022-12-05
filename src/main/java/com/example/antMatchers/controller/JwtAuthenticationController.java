@@ -3,6 +3,7 @@ package com.example.antMatchers.controller;
 
 import com.example.antMatchers.dto.UserDto;
 import com.example.antMatchers.entity.User;
+import com.example.antMatchers.model.ErrorResponse;
 import com.example.antMatchers.model.JwtRequest;
 import com.example.antMatchers.model.JwtResponse;
 import com.example.antMatchers.service.JwtUserDetailService;
@@ -42,8 +43,11 @@ public class JwtAuthenticationController {
     public ResponseEntity<?> createUser(@RequestBody @Valid UserDto userDto) {
         try {
             return new ResponseEntity(userService.createUserService(userDto), HttpStatus.OK);
-        } catch (Exception exception) {
-            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (BadCredentialsException exception) {
+            return new ResponseEntity(new ErrorResponse(exception.getMessage(),HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
+        }
+        catch(Exception exception){
+            return new ResponseEntity(new ErrorResponse(exception.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -52,11 +56,10 @@ public class JwtAuthenticationController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(), jwtRequest.getPassword()));
         } catch (DisabledException e) {
-            throw new Exception("User Disabled", e);
+            return new ResponseEntity(new ErrorResponse(e.getMessage(),HttpStatus.NOT_FOUND),HttpStatus.NOT_FOUND);
         } catch (BadCredentialsException e) {
-            throw new Exception("Invalid Credentials", e);
+            return new ResponseEntity(new ErrorResponse(e.getMessage(),HttpStatus.NOT_FOUND),HttpStatus.NOT_FOUND);
         }
-
         final UserDetails userDetails = jwtUserDetailService.loadUserByUsername(jwtRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
 
