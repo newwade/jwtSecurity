@@ -1,12 +1,28 @@
 {
 	"info": {
-		"_postman_id": "cd01f8ab-3216-4e83-8dee-1eeb3df0d8d5",
+		"_postman_id": "8b5ab169-42e4-4090-a2d0-2aba3d6235a6",
 		"name": "JwtSecurity",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "auth/authenticate - Authentication with username and password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = JSON.parse(responseBody)\r",
+							"pm.environment.set(\"token\", jsonData.jwttoken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -15,7 +31,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"mikes\",\r\n    \"password\":\"password\"\r\n}",
+					"raw": "{\r\n    \"username\":\"mike\",\r\n    \"password\":\"root321\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -23,9 +39,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{Base_Url}}/api/v1/auth/authenticate",
+					"raw": "{{base_url}}/api/v1/auth/authenticate",
 					"host": [
-						"{{Base_Url}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"api",
@@ -77,7 +93,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWtlIiwiZXhwIjoxNjY5NzE2NjM2LCJpYXQiOjE2Njk3MTY1NzZ9.S4GaIhE5qmc_M3owT_oeI8yn_fcr5Tc5v5NTkV2OzmJYEuMgqEWE7RxU1S1fVGHCU7P1gFTVMG63zdxttzCMww",
+							"value": "{{token}}",
 							"type": "string"
 						}
 					]
@@ -85,9 +101,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{Base_Url}}/api/v1/products",
+					"raw": "{{base_url}}/api/v1/products",
 					"host": [
-						"{{Base_Url}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"api",
@@ -214,7 +230,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWtlIiwiZXhwIjoxNjY5MzczMzE5LCJpYXQiOjE2NjkzNTUzMTl9.yiLYpexoayWEuET1LraxPuobsBqtP7KTuz2ds9hX80f4u2wMxat76ste8IKAmQmq2NlCv-tng9XAgbROIJSEvw",
+							"value": "{{token}}",
 							"type": "string"
 						}
 					]
@@ -222,9 +238,9 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{Base_Url}}/api/v1/products/1",
+					"raw": "{{base_url}}/api/v1/products/1",
 					"host": [
-						"{{Base_Url}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"api",
