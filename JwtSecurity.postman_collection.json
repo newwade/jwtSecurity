@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "cd01f8ab-3216-4e83-8dee-1eeb3df0d8d5",
+		"name": "JwtSecurity",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth/authenticate - Authentication with username and password",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"mikes\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Url}}/api/v1/auth/authenticate",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth/register - Create User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"mikes\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Url}}/api/v1/auth/register",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/products - Get products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWtlIiwiZXhwIjoxNjY5NzE2NjM2LCJpYXQiOjE2Njk3MTY1NzZ9.S4GaIhE5qmc_M3owT_oeI8yn_fcr5Tc5v5NTkV2OzmJYEuMgqEWE7RxU1S1fVGHCU7P1gFTVMG63zdxttzCMww",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Base_Url}}/api/v1/products",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/products/add - Create product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWtlIiwiZXhwIjoxNjY5NzE2NjM2LCJpYXQiOjE2Njk3MTY1NzZ9.S4GaIhE5qmc_M3owT_oeI8yn_fcr5Tc5v5NTkV2OzmJYEuMgqEWE7RxU1S1fVGHCU7P1gFTVMG63zdxttzCMww",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"ps4\",\r\n    \"description\":\"old gen gaming console\",\r\n    \"price\":40000.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Url}}/api/v1/products/add",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/products/{product_id} - Get a single product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWtlIiwiZXhwIjoxNjY5MzczMzE5LCJpYXQiOjE2NjkzNTUzMTl9.yiLYpexoayWEuET1LraxPuobsBqtP7KTuz2ds9hX80f4u2wMxat76ste8IKAmQmq2NlCv-tng9XAgbROIJSEvw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Base_Url}}/api/v1/products/1",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/products/update - Update product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWtlIiwiZXhwIjoxNjY5MzczMzE5LCJpYXQiOjE2NjkzNTUzMTl9.yiLYpexoayWEuET1LraxPuobsBqtP7KTuz2ds9hX80f4u2wMxat76ste8IKAmQmq2NlCv-tng9XAgbROIJSEvw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": 1,\r\n        \"name\": \"ps4\",\r\n        \"description\": \"old generation gaming console\",\r\n        \"price\": 40000.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_Url}}/api/v1/products/update",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/products/{product_id} - Delete product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWtlIiwiZXhwIjoxNjY5MzczMzE5LCJpYXQiOjE2NjkzNTUzMTl9.yiLYpexoayWEuET1LraxPuobsBqtP7KTuz2ds9hX80f4u2wMxat76ste8IKAmQmq2NlCv-tng9XAgbROIJSEvw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Base_Url}}/api/v1/products/1",
+					"host": [
+						"{{Base_Url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
